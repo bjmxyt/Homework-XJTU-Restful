@@ -67,4 +67,19 @@ public class jdbcController {
         return res;
     }
 
+
+    @RequestMapping(value = "/affair/{str}", method = RequestMethod.POST)
+    public String InsertAffair(@PathVariable String str)
+    {
+        String sql = "INSERT into t_user (affair) values (' " +str + "')";
+        try
+        {
+            jdbcTemplate.execute(sql);
+        }catch (Exception ex)
+        {
+            return "invalid input";
+        }
+        return "insert success";
+    }
+
 }
