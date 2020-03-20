@@ -82,4 +82,19 @@ public class jdbcController {
         return "insert success";
     }
 
+
+    @RequestMapping(value = "/affair/{id}", method = RequestMethod.DELETE)
+    public String DeleteAffair(@PathVariable int id)
+    {
+        String sql = "DELETE from t_user where id=" + id;
+        try
+        {
+            jdbcTemplate.execute(sql);
+        }catch (Exception ex)
+        {
+            return "Invalid input";
+        }
+        return "delete success";
+    }
+
 }
