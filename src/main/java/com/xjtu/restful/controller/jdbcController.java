@@ -44,4 +44,27 @@ public class jdbcController {
         return res;
     }
 
+    @RequestMapping(value = "/affair/{id}", method = RequestMethod.GET)
+    public String GetAffairById(@PathVariable int id)
+    {
+        String sql = "SELECT * FROM t_user WHERE id=" + id;
+        List<User> userList = jdbcTemplate.query(sql, new RowMapper<User>() {
+            User user = null;
+            @Override
+            public User mapRow(ResultSet rs, int rowNum) throws SQLException {
+                user = new User();
+                user.setId(rs.getString("id"));
+                user.setAffair(rs.getString("affair"));
+                return user;
+            }
+
+        });
+        String res = "";
+        for(User user:userList)
+        {
+            res +=  "id： " +user.getId() + "    事务:   " + user.getAffair() + "\n";
+        }
+        return res;
+    }
+
 }
